@@ -1,0 +1,72 @@
+contacts = []
+def add_cont():
+    name = input("enter name: ").strip()
+    phone = input("enter phone number: ").strip()
+    email = input("enter email: ").strip()
+    for contact in contacts:
+        if contact[0].lower == name.lower():
+            print("Contact with this name already exists.")
+            return
+    contacts.append((name, phone, email))
+    print(" contact added successfully.")
+def view_cont():
+    if not contacts:
+        print("no contacts found")
+        return
+    print("\nContact list:")
+    for i, contact in enumerate(contacts, 1):
+        print(f"{i}. Name: {contact[0]}, Phone: {contact[1]}, Email: {contact[2]}")
+def search_cont():
+    name = input("Enter name to search: ").strip()
+    found = False
+    for contact in contacts:
+        if contact[0].lower() == name.lower():
+            print(f"Found: Name: {contact[0]}, Phone: {contact[1]}, Email: {contact[2]}")
+            found = True
+            break
+    if not found:
+        print("contact not found.")
+def update_phone():
+    name = input("Enter name to update phone number: ").strip()
+    for i, contact in enumerate(contacts):
+        if contact[0].lower() == name.lower():
+            new_phone = input("Enter new phone number: ").strip()
+            contacts[i] = (contact[0], new_phone, contact[2])
+            print("Phone number updated successfully.")
+            return
+    print("contact not found.")
+def delete_cont():
+    name = input("Enter name to delete: ").strip()
+    for i, contact in enumerate(contacts):
+        if contact[0].lower() == name.lower():
+            contacts.pop(i)
+            print("Contact deleted successfully.")
+            return
+    print("Contact not found")
+def main():
+    while True:
+        print("\nContact Manager")
+        print("1. Add contact")
+        print("2. View all contacts")
+        print("3. Search contact")
+        print("4. Update contact phone number")
+        print("5. Delete contact")
+        print("6. Exit")
+        choice = input("Choose an option: ").strip()
+        if choice == '1':
+            add_cont()
+        elif choice == '2':
+            view_cont()
+        elif choice == '3':
+            search_cont()
+        elif choice == '4':
+            update_phone()
+        elif choice == '5':
+            delete_cont()
+        elif choice == '6':
+            print("Exit Contact manager.")
+            break
+        else:
+            print("Invalid option, please choose from given options.")
+if __name__ == "__main__":
+    main()
